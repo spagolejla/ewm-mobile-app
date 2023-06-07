@@ -1,0 +1,7 @@
+{
+  "name": "ewm-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
