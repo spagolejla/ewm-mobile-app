@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as sharedSelectors from '../app/root-store/shared-store/selectors';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  title$ = this.store$.select(sharedSelectors.selectTtile);
+  
+  constructor(private store$: Store<any>) {}
 }

@@ -1,0 +1,22 @@
+ion-toolbar {
+    --background: #4AC09D;
+    --color: white;
+
+    --border-color: #4AC09D;
+    --border-width: 4px 0;
+    --border-style: double;
+
+    --min-height: 50px;
+    // --padding-top: 20px;
+    // --padding-bottom: 20px;
+}
+
+.c-white {
+    color: white !important
+}
+
+::ng-deep ion-buttons {
+    ion-menu-button {
+        color: white;
+    }
+}
