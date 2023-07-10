@@ -24,3 +24,35 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+@import "bootstrap";
+
+.color-1 {
+    color: rgb(16, 56, 16);
+}
+
+.color-2 {
+    color: #eb8c00 !important;
+}
+
+.color-3 {
+    color: #b00020 !important;
+}
+
+
+.task-status-color-1 {
+    background: linear-gradient(60deg, #26c6da, #00acc1);
+    color: white;
+}
+
+.task-status-color-2 {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+
+.task-status-color-3 {
+    background: linear-gradient(60deg, #ffa726, #fb8c00);
+}
+
+.task-status-color-4 {
+    background-color: lightgrey;
+}

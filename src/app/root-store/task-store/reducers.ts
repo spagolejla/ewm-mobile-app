@@ -20,6 +20,11 @@ const deviceReducer = createReducer (
       tmpState.selectedTask = task
       return tmpState;
     }),
+    on(actions.getActiveTaskSuccess, (state: State, { task }) => {
+      const tmpState = { ... state };
+      tmpState.activeTask = task
+      return tmpState;
+    }),
 );
 
 export function reducer(state: State | undefined, action: Action ) {

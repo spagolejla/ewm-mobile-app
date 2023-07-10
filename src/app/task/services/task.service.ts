@@ -16,8 +16,26 @@ export class TaskService {
    return this.httpClient.get<Array<Task>>(this.URL);
   }
 
+  getActiveTask(id: string): Observable<Task> {
+    return this.httpClient.get<Task>(this.URL + '/activeTask/' + id);
+  }
+
   createTask(task: Task): Observable<Task> {
     return this.httpClient.post(this.URL, task, { observe: 'response' })
+      .pipe(map((response: any) => {
+        return response.body;
+      }));
+  }
+
+  startTask(task: Task): Observable<Task> {
+    return this.httpClient.put(this.URL + '/startTask', task, { observe: 'response' })
+      .pipe(map((response: any) => {
+        return response.body;
+      }));
+  }
+
+  stopTask(task: Task): Observable<Task> {
+    return this.httpClient.put(this.URL + '/stopTask', task, { observe: 'response' })
       .pipe(map((response: any) => {
         return response.body;
       }));

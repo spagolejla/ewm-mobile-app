@@ -12,6 +12,12 @@ export enum ActionTypes {
     UPDATE_TASK_SUCCESS = '[Task] Update Task Success',
     DELETE_TASK_REQUEST = '[Task] Delete Task Request',
     DELETE_TASK_SUCCESS = '[Task] Delete Task Success',
+    START_TASK_REQUEST = '[Task] Start Task Request',
+    START_TASK_SUCCESS = '[Task] Start Task Success',
+    GET_ACTIVE_TASK_REQUEST = '[Task] Get Active Task Request',
+    GET_ACTIVE_TASK_SUCCESS = '[Task] Get Active Task Success',
+    STOP_TASK_REQUEST = '[Task] Stop Task Request',
+    STOP_TASK_SUCCESS = '[Task] Stop Task Success',
     NO_ACTION  = "[Task] No Action",
     ERROR  = "[Task] ERROR Action",
 }
@@ -26,6 +32,12 @@ export const updateTaskRequest = createAction(ActionTypes.UPDATE_TASK_REQUEST, p
 export const updateTaskSuccess = createAction(ActionTypes.UPDATE_TASK_SUCCESS, props<  { task: Task } >());
 export const deleteTaskRequest = createAction(ActionTypes.DELETE_TASK_REQUEST, props<  { taskId: string } >());
 export const deleteTaskSuccess = createAction(ActionTypes.DELETE_TASK_SUCCESS);
+export const startTaskRequest = createAction(ActionTypes.START_TASK_REQUEST, props<  { task: Task } >());
+export const startTaskSuccess = createAction(ActionTypes.START_TASK_SUCCESS, props<  { task: Task } >());
+export const stopTaskRequest = createAction(ActionTypes.STOP_TASK_REQUEST, props<  { task: Task } >());
+export const stopTaskSuccess = createAction(ActionTypes.STOP_TASK_SUCCESS, props<  { task: Task } >());
+export const getActiveTaskRequest = createAction(ActionTypes.GET_ACTIVE_TASK_REQUEST);
+export const getActiveTaskSuccess = createAction(ActionTypes.GET_ACTIVE_TASK_SUCCESS, props<  { task: Task } >());
 export const noAction = createAction(ActionTypes.NO_ACTION);
 export const errorAction = createAction(ActionTypes.ERROR, props<  { error: any } >());
 

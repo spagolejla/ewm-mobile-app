@@ -26,24 +26,64 @@ export class TaskEffects {
         )
     );
 
-    // saveTasksRequest$ = createEffect(() =>
-    //     this.actions$.pipe(
-    //         ofType(ActionTypes.SAVE_TASK_REQUEST),
-    //         exhaustMap(action =>
-    //             this.taskService.createTask(action['task']).pipe(
-    //                 concatMap((task) => {
-    //                     return [
-    //                         taskActions.saveTaskSuccess({ task }),
-    //                         taskActions.loadDataRequest(),
-    //                     ]
-    //                 }),
-    //                 catchError(error =>
-    //                     of(taskActions.errorAction({ error }))
-    //                 )
-    //             )
-    //         )
-    //     )
-    // );
+    startTasksRequest$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ActionTypes.START_TASK_REQUEST),
+            exhaustMap(action =>
+                this.taskService.startTask(action['task']).pipe(
+                    concatMap((task) => {
+                        return [
+                            taskActions.startTaskSuccess({ task }),
+                            taskActions.loadDataRequest(),
+                            taskActions.getActiveTaskRequest()
+                        ]
+                    }),
+                    catchError(error =>
+                        of(taskActions.errorAction({ error }))
+                    )
+                )
+            )
+        )
+    );
+
+    stopTasksRequest$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(ActionTypes.STOP_TASK_REQUEST),
+        exhaustMap(action =>
+            this.taskService.stopTask(action['task']).pipe(
+                concatMap((task) => {
+                    return [
+                        taskActions.stopTaskSuccess({ task }),
+                        taskActions.loadDataRequest(),
+                        taskActions.getActiveTaskRequest()
+                    ]
+                }),
+                catchError(error =>
+                    of(taskActions.errorAction({ error }))
+                )
+            )
+        )
+    )
+);
+
+    getActiveTasksRequest$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(ActionTypes.GET_ACTIVE_TASK_REQUEST),
+        exhaustMap(action =>
+            this.taskService.getActiveTask('00ee6e49-dd17-41a2-be30-14a2d8d5c7dd').pipe( // TODO: id from loggedIn user
+                concatMap((task) => {
+                    return [
+                        taskActions.getActiveTaskSuccess({ task }),
+                        //taskActions.loadDataRequest(),
+                    ]
+                }),
+                catchError(error =>
+                    of(taskActions.errorAction({ error }))
+                )
+            )
+        )
+    )
+);
 
     // updateTasksRequest$ = createEffect(() =>
     //     this.actions$.pipe(

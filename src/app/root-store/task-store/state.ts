@@ -8,6 +8,8 @@ export interface State {
     selectedTask?: Task;
     searchActive: boolean;
     searchValue: string;
+    activeTask?: Task;
+
 };
 
 export const initialState: State = {
@@ -15,5 +17,6 @@ export const initialState: State = {
     tasks: [],
     selectedTask: undefined,
     searchActive: false,
-    searchValue: ""
+    searchValue: "",
+    activeTask: undefined
 };

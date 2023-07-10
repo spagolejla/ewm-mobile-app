@@ -4,9 +4,10 @@ import { TaskState } from 'src/app/root-store/task-store';
 import * as taskActions from '../../../root-store/task-store/actions';
 import * as taskSelectors from '../../../root-store/task-store/selectors';
 import * as sharedActions from '../../../root-store/shared-store/actions';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-task',
+  selector: 'ewm-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
@@ -14,13 +15,17 @@ export class TaskComponent  implements OnInit {
 
   tasks$ = this.store$.select(taskSelectors.selectFilteredTasks);
 
-  constructor(private store$: Store<TaskState.State>) { }
+  constructor(private store$: Store<TaskState.State>, private router: Router) { }
 
   ngOnInit() {
     this.store$.dispatch(sharedActions.setTitle({title: 'Tasks'}))
     this.store$.dispatch(taskActions.loadDataRequest())
 
     this.tasks$.subscribe(value => console.log(value));
+  }
+
+  openDetails(id: string) {
+     this.router.navigate([`tabs/task/details/${id}`])
   }
 
 }

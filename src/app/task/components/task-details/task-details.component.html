@@ -1,0 +1,70 @@
+<ion-content *ngIf="selectedTask$ | async as task">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle class="d-flex justify-content-between">{{task.createdDate | date: 'short'}}
+      </ion-card-subtitle>
+      <ion-card-title>{{task.title}}
+        <ion-icon class="icon-priority color-{{task.priority}}" name="warning"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{task.description}}
+      <ion-row class="d-flex justify-content-end">
+        <ion-chip class="task-status-color-{{task.status}}">{{TaskStatus[task.status]}}</ion-chip>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Task details
+       
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Project:</span>
+        <span>{{task.project.name}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Assigner:</span>
+        <span>{{task.assigner.name}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Task No:</span>
+        <span>{{task.taskNo}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Start:</span>
+        <span>{{task.startDate | date: 'short'}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>End:</span>
+        <span>{{task.endDate | date: 'short'}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Time elapsed:(not implemented)</span>
+        <span>13h 30m</span>
+      </ion-row>
+  
+ 
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small">
+      <ion-icon name="chevron-back-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button *ngIf="task.status != 2 && task.status !=4" (click)="startTask(task)">
+        Start
+      </ion-fab-button>
+      <ion-fab-button *ngIf="task.status == 2" (click)="finishTask(task)">
+        Finish
+      </ion-fab-button>
+      <ion-fab-button *ngIf="task.status == 2" (click)="stopTask(task)">
+        Stop
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

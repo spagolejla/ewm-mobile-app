@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { State } from "./state";
 import * as fromRouter from '@ngrx/router-store';
 import { RouterState } from "@angular/router";
+import { selectRouteParams } from "../router-selectors";
 // import { getSelectors } from "@ngrx/router-store";
 // import { selectTitle, selectCurrentRoute, selectUrl, selectFragment, selectQueryParams, selectRouteParams } from "../router-selectors";
 
@@ -28,19 +29,26 @@ export const selectFilteredTasks = createSelector(
     }
 );
 
-// export const selectedTask = createSelector(
-//     selectTasks,
-//     selectRouteParams,
-//     (tasks, routerParams) => {
-//         const id = routerParams && routerParams["id"]
-//         return tasks && tasks.find(x => x.id == id);
-//     }
-// );
+export const selectedTask = createSelector(
+    selectTasks,
+    selectRouteParams,
+    (tasks, routerParams) => {
+        const id = routerParams && routerParams["id"]
+        return tasks && tasks.find(x => x.id == id);
+    }
+);
 
 export const selectedTaskFromState = createSelector(
     selectTaskState,
     (state) => {
         return state.selectedTask;
+    }
+);
+
+export const getActiveTask = createSelector(
+    selectTaskState,
+    (state) => {
+        return state.activeTask;
     }
 );
 
