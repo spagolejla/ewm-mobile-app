@@ -6,6 +6,7 @@ import { routerReducer, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 import { SharedStoreModule } from "./shared-store";
 import { TasksStoreModule } from "./task-store";
+import { TimesheetsStoreModule } from "./timesheet-store";
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { TasksStoreModule } from "./task-store";
     StoreRouterConnectingModule.forRoot(),
     SharedStoreModule,
     TasksStoreModule,
-   
+    TimesheetsStoreModule
   ]
 })
 export class RootStoreModule { }

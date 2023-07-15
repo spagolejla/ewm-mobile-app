@@ -2,14 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimesheetComponent } from './components/timesheet/timesheet.component';
 import { TimesheetRoutingModule } from './timesheet-routing.module';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialDesignModule } from '../shared/models/modules/material-design.module';
 
 
 
 @NgModule({
   declarations: [TimesheetComponent],
   imports: [
+    IonicModule.forRoot({ mode: 'ios' }),
     CommonModule,
-    TimesheetRoutingModule
+    TimesheetRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialDesignModule
   ]
 })
 export class TimesheetModule { }

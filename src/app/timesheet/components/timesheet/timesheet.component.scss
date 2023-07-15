@@ -1,0 +1,45 @@
+.noData {
+    display: flex;
+    margin-top: 50% !important;
+    justify-content: center;
+}
+
+.dateSwitch {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.dateDisplay {
+    border: 1px lightgray;
+    display: flex;
+    /* background: lightblue; */
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.switchButton {
+    --background: #4AC09D;
+    --background-activated: #4AC09D;
+    --background-focused: #4AC09D;
+}
+
+.total-hours {
+    font-size: large;
+    font-weight: bold;
+}
+
+.h-200 {
+    max-height: 200px !important;
+}
+
+.h-250 {
+    max-height: 250px !important;
+}
+
+.status-chip {
+    font-size: smaller;
+}

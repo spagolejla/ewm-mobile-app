@@ -2,7 +2,8 @@
   <ion-item button *ngFor="let task of tasks$ | async" class="p-10" lines="full" detail="false" (click)="openDetails(task.id)">
     <ion-icon class="icon-priority color-{{task.priority}}" name="warning"></ion-icon>
     <ion-label class="ml-10">
-      {{task.title}}</ion-label>
+      {{task.title}}
+    </ion-label>
   </ion-item>
 
 </ion-list>
