@@ -1,3 +1,16 @@
-<p>
-  project works!
-</p>
+<ion-list *ngIf="projects$ | async as projects">
+  <div *ngIf="projects.length; else noData">
+    <ion-item button *ngFor="let project of projects" class="p-10" lines="full" detail="false"
+      (click)="openDetails(project.id)">
+      <ion-label class="ml-10">
+        {{project.name}}
+      </ion-label>
+      <ion-chip class="project-color-{{project.status}}">{{ProjectStatus[project.status]}}</ion-chip>
+    </ion-item>
+  </div>
+</ion-list>
+<ng-template #noData>
+  <div class="noData">
+    <ion-note>No projects to show.</ion-note>
+  </div>
+</ng-template>

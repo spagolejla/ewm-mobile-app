@@ -1,0 +1,57 @@
+<ion-content *ngIf="selectedProject$ | async as project">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle class="d-flex justify-content-between">{{project.startDate | date: 'shortDate'}}
+      </ion-card-subtitle>
+      <ion-card-title>{{project.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{project.description}}
+      <ion-row class="d-flex justify-content-end">
+        <ion-chip class="project-color-{{project.status}}">{{ProjectStatus[project.status]}}</ion-chip>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <h2>Project details
+      </h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Start date</span>
+        <span>{{project.startDate | date: 'short'}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>End date:</span>
+        <span>{{project.endDate | date: 'short' }}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Location:</span>
+        <span>{{project.location}}</span>
+      </ion-row>
+      <ion-row class="d-flex justify-content-between mb-2">
+        <span>Budget amount:</span>
+        <span>{{project.budgetAmount}}</span>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <h2>Project tasks
+      </h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item button *ngFor="let task of selectedProjectTasks$ | async" class="p-10" lines="full" detail="false">
+          <ion-icon class="icon-priority color-{{task.priority}}" name="warning"></ion-icon>
+          <ion-label class="ml-10">
+            {{task.title}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

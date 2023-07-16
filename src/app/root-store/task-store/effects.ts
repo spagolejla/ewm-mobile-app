@@ -19,7 +19,7 @@ export class TaskEffects {
     loadTasks$ = createEffect(() =>
         this.actions$.pipe(
             ofType(ActionTypes.LOAD_DATA_REQUEST),
-            switchMap(() => this.taskService.getTasks().pipe(
+            switchMap(() => this.taskService.getTasksByUser().pipe(
                 map(tasks => loadDataSuccess({ tasks })),
                 catchError(() => of(noAction))
             ))

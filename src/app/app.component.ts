@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as sharedSelectors from '../app/root-store/shared-store/selectors';
 import * as taskActions from '../app/root-store/task-store/actions';
 import * as taskSelectors from '../app/root-store/task-store/selectors';
+import * as projectActions from '../app/root-store/projects-store/actions';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class AppComponent implements OnInit {
   constructor(private store$: Store<any>, private router: Router) {}
 
   ngOnInit(): void {
-    this.store$.dispatch(taskActions.getActiveTaskRequest())
-    this.store$.dispatch(taskActions.loadDataRequest())
+    this.store$.dispatch(taskActions.loadDataRequest());
+    this.store$.dispatch(projectActions.loadDataRequest());
+    this.store$.dispatch(taskActions.getActiveTaskRequest());
   }
 
   openActiveTask(id: string | undefined) {

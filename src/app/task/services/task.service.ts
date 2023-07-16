@@ -20,6 +20,15 @@ export class TaskService {
     return this.httpClient.get<Task>(this.URL + '/activeTask/' + id);
   }
 
+  getTasksByProject(projectId: string | undefined): Observable<Array<Task>> {
+    return this.httpClient.get<Array<Task>>(this.URL + '/project/' + projectId);
+   }
+
+   getTasksByUser(): Observable<Array<Task>> {
+    let userId = "00ee6e49-dd17-41a2-be30-14a2d8d5c7dd"; // TODO: change to loggedin user
+    return this.httpClient.get<Array<Task>>(this.URL + '/user/' + userId);
+   }
+
   createTask(task: Task): Observable<Task> {
     return this.httpClient.post(this.URL, task, { observe: 'response' })
       .pipe(map((response: any) => {

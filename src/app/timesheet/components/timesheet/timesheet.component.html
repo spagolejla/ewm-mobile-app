@@ -16,7 +16,7 @@
 <ion-content class="ion-padding">
   <div *ngIf="currentTimesheet$ | async as timesheet; else noData">
     <div class="row">
-      <h4 class="col-9">Timesheet status: </h4>
+      <h3 class="col-9">Timesheet status </h3>
       <ion-chip
         class="col justify-content-center timesheet-color-{{timesheet.status}}">{{getTimesheetStatus(timesheet.status)}}</ion-chip>
     </div>
@@ -51,7 +51,7 @@
           (click)="sumbmitTimesheet(timesheet)">Submit</ion-chip> </div>
     </div>
     <div class="row mt-2">
-      <h4>Timesheet actions </h4>
+      <h3>Timesheet actions </h3>
       <ion-grid class="h-250 overflow-scroll">
         <ion-row>
           <ion-col>Status</ion-col>
