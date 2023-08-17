@@ -30,4 +30,11 @@ export class ProjectComponent  implements OnInit {
      this.router.navigate([`tabs/project/details/${id}`])
   }
 
+  doRefresh(event: any) {
+    setTimeout(() => {
+      this.store$.dispatch(projectActions.loadDataRequest())
+      event.target.complete();
+    }, 1000);
+  }
+
 }

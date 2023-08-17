@@ -1,3 +1,7 @@
+<ion-content>
+  <ion-refresher  slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 <ion-list *ngIf="projects$ | async as projects">
   <div *ngIf="projects.length; else noData">
     <ion-item button *ngFor="let project of projects" class="p-10" lines="full" detail="false"
@@ -14,3 +18,4 @@
     <ion-note>No projects to show.</ion-note>
   </div>
 </ng-template>
+</ion-content>

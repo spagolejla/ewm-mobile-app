@@ -10,3 +10,18 @@ export const selectCurrentTimesheet = createSelector(
     }
 );
 
+export const selectNumberOfCompletedTasks = createSelector(
+    selectCurrentTimesheet,
+    (timesheet) => {
+        if (timesheet && timesheet.workPeriods) {
+            var workPeriods = timesheet.workPeriods.filter(x => x.end != undefined);
+            var tasks = workPeriods.map( x=> x.task?.taskNo);
+            var uniqueTasks = [...new Set(tasks.map(task => task))]
+            return uniqueTasks.length;
+        }
+
+        return 0;
+        return 
+    }
+);
+

@@ -1,77 +1,82 @@
-<div class="row dateSwitch">
-  <div class="col">
-    <ion-button class="switchButton" (click)="previousTimesheet()">
-      <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
-    </ion-button>
-  </div>
-  <div class="col-6 dateDisplay">
-    <h2>{{displayedDate | date: 'shortDate'}}</h2>
-  </div>
-  <div class="col">
-    <ion-button class="switchButton" (click)="nextTimesheet()" [disabled]="disabled">
-      <ion-icon slot="icon-only" name="chevron-forward"></ion-icon>
-    </ion-button>
-  </div>
-</div>
-<ion-content class="ion-padding">
-  <div *ngIf="currentTimesheet$ | async as timesheet; else noData">
-    <div class="row">
-      <h3 class="col-9">Timesheet status </h3>
-      <ion-chip
-        class="col justify-content-center timesheet-color-{{timesheet.status}}">{{getTimesheetStatus(timesheet.status)}}</ion-chip>
+<ion-content>
+  <ion-refresher  slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="row dateSwitch">
+    <div class="col">
+      <ion-button class="switchButton" (click)="previousTimesheet()">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
     </div>
-    <div class="row">
-      <ion-grid class="h-200 overflow-scroll">
-        <ion-row>
-          <ion-col>Task</ion-col>
-          <ion-col>Start</ion-col>
-          <ion-col>End</ion-col>
-          <ion-col>Total</ion-col>
-        </ion-row>
-        <ion-row *ngFor="let wp of timesheet.workPeriods">
-          <ion-col><ion-icon class="icon-priority color-{{wp.task?.priority}}"
-              name="warning"></ion-icon>{{wp.task?.taskNo}}</ion-col>
-          <ion-col>{{wp.start | date: 'shortTime'}}</ion-col>
-          <ion-col>{{wp.end | date: 'shortTime'}}</ion-col>
-          <ion-col>{{wp.totalHours | number:'1.2-2'}}</ion-col>
-        </ion-row>
-      </ion-grid>
+    <div class="col-6 dateDisplay">
+      <h2>{{displayedDate | date: 'shortDate'}}</h2>
     </div>
-    <div class="row mb-4">
-      <div class="col-9">Total hours: </div>
-      <div class="col justify-content-center total-hours">{{timesheet.totalHours | number:'1.2-2'}}</div>
-    </div>
-    <div class="row mt-2"
-      *ngIf="timesheet.status == TimesheetStatus.Open || timesheet.status == TimesheetStatus.Rejected">
-      <h4>Commit timesheet </h4>
-      <ion-item>
-        <ion-textarea label="Comment" labelPlacement="floating" [formControl]="comment"></ion-textarea>
-      </ion-item>
-      <div class="col d-flex justify-content-end "> <ion-chip class="timesheet-color-2"
-          (click)="sumbmitTimesheet(timesheet)">Submit</ion-chip> </div>
-    </div>
-    <div class="row mt-2">
-      <h3>Timesheet actions </h3>
-      <ion-grid class="h-250 overflow-scroll">
-        <ion-row>
-          <ion-col>Status</ion-col>
-          <ion-col>Comment</ion-col>
-          <ion-col>User</ion-col>
-          <ion-col>Date</ion-col>
-        </ion-row>
-        <ion-row *ngFor="let action of timesheet.actions">
-          <ion-col  size="3"><ion-chip
-            class="status-chip timesheet-color-{{action.status}}">{{getTimesheetStatus(action.status)}}</ion-chip></ion-col>
-          <ion-col class="overflow-scroll">{{action.comment}}</ion-col>
-          <ion-col>{{action.user?.name}}</ion-col>
-          <ion-col>{{action.date | date: 'shortDate'}}</ion-col>
-        </ion-row>
-      </ion-grid>
+    <div class="col">
+      <ion-button class="switchButton" (click)="nextTimesheet()" [disabled]="disabled">
+        <ion-icon slot="icon-only" name="chevron-forward"></ion-icon>
+      </ion-button>
     </div>
   </div>
-  <ng-template #noData>
-    <div class="noData">
-      <ion-note>No timesheet for selected date.</ion-note>
+  <ion-content class="ion-padding">
+    <div *ngIf="currentTimesheet$ | async as timesheet; else noData">
+      <div class="row">
+        <h3 class="col-9">Timesheet status </h3>
+        <ion-chip
+          class="col justify-content-center timesheet-color-{{timesheet.status}}">{{getTimesheetStatus(timesheet.status)}}</ion-chip>
+      </div>
+      <div class="row">
+        <ion-grid class="h-200 overflow-scroll">
+          <ion-row>
+            <ion-col>Task</ion-col>
+            <ion-col>Start</ion-col>
+            <ion-col>End</ion-col>
+            <ion-col>Total</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let wp of timesheet.workPeriods">
+            <ion-col><ion-icon class="icon-priority color-{{wp.task?.priority}}"
+                name="warning"></ion-icon>{{wp.task?.taskNo}}</ion-col>
+            <ion-col>{{wp.start | date: 'shortTime'}}</ion-col>
+            <ion-col>{{wp.end | date: 'shortTime'}}</ion-col>
+            <ion-col>{{wp.totalHours | number:'1.2-2'}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="row mb-4">
+        <div class="col-9">Total hours: </div>
+        <div class="col justify-content-center total-hours">{{timesheet.totalHours | number:'1.2-2'}}</div>
+      </div>
+      <div class="row mt-2"
+        *ngIf="timesheet.status == TimesheetStatus.Open || timesheet.status == TimesheetStatus.Rejected">
+        <h4>Commit timesheet </h4>
+        <ion-item>
+          <ion-textarea label="Comment" labelPlacement="floating" [formControl]="comment"></ion-textarea>
+        </ion-item>
+        <div class="col d-flex justify-content-end "> <ion-chip class="timesheet-color-2"
+            (click)="sumbmitTimesheet(timesheet)">Submit</ion-chip> </div>
+      </div>
+      <div class="row mt-2">
+        <h3>Timesheet actions </h3>
+        <ion-grid class="h-250 overflow-scroll">
+          <ion-row>
+            <ion-col>Status</ion-col>
+            <ion-col>Comment</ion-col>
+            <ion-col>User</ion-col>
+            <ion-col>Date</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let action of timesheet.actions">
+            <ion-col  size="3"><ion-chip
+              class="status-chip timesheet-color-{{action.status}}">{{getTimesheetStatus(action.status)}}</ion-chip></ion-col>
+            <ion-col class="overflow-scroll">{{action.comment}}</ion-col>
+            <ion-col>{{action.user?.name}}</ion-col>
+            <ion-col>{{action.date | date: 'shortDate'}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </div>
-  </ng-template>
+    <ng-template #noData>
+      <div class="noData">
+        <ion-note>No timesheet for selected date.</ion-note>
+      </div>
+    </ng-template>
+  </ion-content>
 </ion-content>

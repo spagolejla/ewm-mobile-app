@@ -1,15 +1,20 @@
-<ion-list *ngIf="tasks$ | async as tasks">
-  <div *ngIf="tasks.length; else noData">
-    <ion-item button *ngFor="let task of tasks" class="p-10" lines="full" detail="false" (click)="openDetails(task.id)">
-      <ion-icon class="icon-priority color-{{task.priority}}" name="warning"></ion-icon>
-      <ion-label class="ml-10">
-        {{task.title}}
-      </ion-label>
-    </ion-item>
-  </div>
-</ion-list>
-<ng-template #noData>
-  <div class="noData">
-    <ion-note>No tasks to show.</ion-note>
-  </div>
-</ng-template>
+<ion-content>
+  <ion-refresher  slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="tasks$ | async as tasks">
+    <div *ngIf="tasks.length; else noData">
+      <ion-item button *ngFor="let task of tasks" class="p-10" lines="full" detail="false" (click)="openDetails(task.id)">
+        <ion-icon class="icon-priority color-{{task.priority}}" name="warning"></ion-icon>
+        <ion-label class="ml-10">
+          {{task.title}}
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ng-template #noData>
+    <div class="noData">
+      <ion-note>No tasks to show.</ion-note>
+    </div>
+  </ng-template>
+</ion-content>

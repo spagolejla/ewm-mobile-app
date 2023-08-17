@@ -5,6 +5,7 @@ import * as sharedSelectors from '../app/root-store/shared-store/selectors';
 import * as taskActions from '../app/root-store/task-store/actions';
 import * as taskSelectors from '../app/root-store/task-store/selectors';
 import * as projectActions from '../app/root-store/projects-store/actions';
+import * as timesheetActions from '../app/root-store/timesheet-store/actions';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
     this.store$.dispatch(taskActions.loadDataRequest());
     this.store$.dispatch(projectActions.loadDataRequest());
     this.store$.dispatch(taskActions.getActiveTaskRequest());
+    this.store$.dispatch(timesheetActions.loadTimesheetRequest({ date: new Date }));
   }
 
   openActiveTask(id: string | undefined) {

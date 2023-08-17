@@ -28,4 +28,11 @@ export class TaskComponent  implements OnInit {
      this.router.navigate([`tabs/task/details/${id}`])
   }
 
+  doRefresh(event: any) {
+    setTimeout(() => {
+      this.store$.dispatch(taskActions.loadDataRequest())
+      event.target.complete();
+    }, 1000);
+  }
+
 }

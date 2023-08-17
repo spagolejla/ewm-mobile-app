@@ -1,3 +1,43 @@
-<p>
-  home works!
-</p>
+<ion-content>
+  <ion-refresher  slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <ion-card-header>
+      <div *ngIf="activeTask$ | async as activeTask; else noActiveTask">
+        <h2> {{'Task No.' + ' ' + activeTask.taskNo}} <ion-icon class="icon-priority color-{{activeTask.status}}"
+            name="warning"></ion-icon></h2>
+      </div>
+      <ng-template #noActiveTask>
+        <h2>No active task</h2>
+      </ng-template>
+      <h1>Currently active on:</h1>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h1>Completed tasks today:</h1>
+
+      <ion-row class="d-flex">
+        <ion-chip class="completed-tasks">{{completedTasksCount$ | async}}</ion-chip>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="openProjects()">
+    <ion-card-content>
+      <div class="d-flex justify-content-between"><span>Projects</span><span class="nav-arrow">></span></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="openTimesheets()">
+    <ion-card-content>
+      <div class="d-flex justify-content-between"><span>Timesheets</span><span class="nav-arrow">></span></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="openProjects()">
+    <ion-card-content>
+      <div class="d-flex justify-content-between"><span>User profile</span><span class="nav-arrow">></span></div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

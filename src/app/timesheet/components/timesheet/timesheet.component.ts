@@ -89,4 +89,12 @@ export class TimesheetComponent implements OnInit {
     this.store$.dispatch(timesheetActions.updateTimesheetRequest({ timesheet }));
   }
 
+  doRefresh(event: any) {
+    setTimeout(() => {
+      var dateValue = new Date(this.displayedDate);
+      this.store$.dispatch(timesheetActions.loadTimesheetRequest({ date: dateValue }));
+      event.target.complete();
+    }, 1000);
+  }
+
 }
