@@ -10,6 +10,11 @@ const deviceReducer = createReducer(
     tmpState.title = title
     return tmpState;
   }),
+  on(actions.setLoggedUser, (state: State, { user }) => {
+    const tmpState = { ...state };
+    tmpState.loggedInUser = user
+    return tmpState;
+  }),
 );
 
 export function reducer(state: State | undefined, action: Action) {

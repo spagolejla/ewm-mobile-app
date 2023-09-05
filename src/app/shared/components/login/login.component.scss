@@ -1,0 +1,39 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+  }
+  
+  .login-card {
+    max-width: 320px;
+    width: 100%;
+    background-color: white;
+
+    .login-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: rgb(74, 192, 157);
+      display: flex;
+      justify-content: center;
+    }
+  
+    .login-input {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  
+    .login-button {
+      width: 100%;
+      margin-top: 16px;
+      background-color: rgb(74, 192, 157);
+    }
+  
+    .forgot-password {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #666;
+    }
+  }
+  

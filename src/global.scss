@@ -105,3 +105,11 @@
     margin-top: 50% !important;
     justify-content: center;
 }
+
+::ng-deep .login-input mat-form-field  {
+    .mat-mdc-text-field-wrapper {
+        background-color: rgb(74, 192, 157) !important;
+
+    }
+  }
+  

@@ -1,0 +1,14 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="login-title">EWM Mobile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ion-input  class="login-input" placeholder="Email" type="text" [(ngModel)]="email" name="email" required></ion-input>
+      <ion-input  class="login-input" placeholder="Password" type="password" [(ngModel)]="password" name="password" required></ion-input>
+      <button mat-raised-button color="primary" class="login-button" (click)="login()">Log In</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
