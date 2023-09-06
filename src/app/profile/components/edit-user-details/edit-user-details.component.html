@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Edit details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()" [strong]="true">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="formGroup">
+    <ion-row class="center-content">
+      <img class="d-flex justify-self-ceneter" alt="" src="{{this.formGroup.get('avatarUrl')?.value}}" width="200"
+      height="90" />
+    </ion-row>
+    <ion-item>
+      <ion-label position="floating" >Avatar Url</ion-label>
+      <ion-textarea [autoGrow]="true" formControlName="avatarUrl"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" >Short Description</ion-label>
+      <ion-textarea [autoGrow]="true" formControlName="shortDescription"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" >Position</ion-label>
+      <ion-input formControlName="position"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" >Telephone</ion-label>
+      <ion-input formControlName="telephone"></ion-input>
+    </ion-item>
+
+  </form>
+
+
+</ion-content>

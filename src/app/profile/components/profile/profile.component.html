@@ -1,3 +1,36 @@
-<p>
-  profile works!
-</p>
+<ion-content *ngIf="loggedUser$ | async as loggedUser">
+  <ion-card class="d-grid">
+    <img class="d-flex justify-self-ceneter" alt="Silhouette of mountains" src="{{loggedUser.avatarUrl}}" width="200"
+      height="90" />
+    <ion-card-header>
+      <ion-card-title>{{loggedUser.firstName + ' ' + loggedUser.lastName}}</ion-card-title>
+      <ion-card-subtitle>{{loggedUser.position}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        {{loggedUser.shortDescription}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <h3><span class="label-details">Email:</span> {{ loggedUser.email }}</h3>
+      <h3><span class="label-details">Telephone:</span> {{ loggedUser.telephone }}</h3>
+      <h3><span class="label-details">Start work date:</span> {{ loggedUser.startWorkDate | date: 'short'}}</h3>
+      <h3><span class="label-details">Salary Per Hour:</span> {{ loggedUser.salaryPerHour + ' BAM'}}</h3>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small">
+      <ion-icon name="chevron-back-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button style="width: 120px;" (click)="changePassword(loggedUser)">
+        Change password
+      </ion-fab-button>
+      <ion-fab-button style="width: 100px;" (click)="editDetails(loggedUser)">
+        Edit details
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

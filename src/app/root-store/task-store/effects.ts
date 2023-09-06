@@ -6,6 +6,7 @@ import { TaskService } from "src/app/task/services/task.service";
 import { ActionTypes, loadDataSuccess, noAction } from "./actions";
 import * as taskActions from './actions'
 import { TaskState } from ".";
+import { AuthService } from "src/app/shared/services/auth.service";
 
 
 @Injectable()
@@ -13,7 +14,8 @@ export class TaskEffects {
     constructor(
         private actions$: Actions,
         private taskService: TaskService,
-        private store$: Store<TaskState.State>
+        private store$: Store<TaskState.State>,
+        private authService: AuthService
     ) { }
 
     loadTasks$ = createEffect(() =>
@@ -69,8 +71,9 @@ export class TaskEffects {
     getActiveTasksRequest$ = createEffect(() =>
     this.actions$.pipe(
         ofType(ActionTypes.GET_ACTIVE_TASK_REQUEST),
-        exhaustMap(action =>
-            this.taskService.getActiveTask('00ee6e49-dd17-41a2-be30-14a2d8d5c7dd').pipe( // TODO: id from loggedIn user
+        exhaustMap(_ => {
+            let userId = this.authService.getUser()?.id;
+            return this.taskService.getActiveTask(userId).pipe(
                 concatMap((task) => {
                     return [
                         taskActions.getActiveTaskSuccess({ task }),
@@ -81,6 +84,8 @@ export class TaskEffects {
                     of(taskActions.errorAction({ error }))
                 )
             )
+        }
+          
         )
     )
 );

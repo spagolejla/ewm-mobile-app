@@ -14,7 +14,7 @@ export class LoginComponent {
 
   email: string = '';
   password: string = '';
-  errorMessage: string = '';
+  errorMessage: string | null = null;
 
   constructor(
     private store$: Store<SharedState.State>,
@@ -26,7 +26,7 @@ export class LoginComponent {
       (response) => {
         const token = response.token;
         this.authService.setToken(token);
-        this.errorMessage = '';
+        this.errorMessage = null;
         this.router.navigate(["/tabs/home"])
         //save loggedinuser
         this.store$.dispatch(sharedActions.setLoggedUser({user: response.loggedUser}))

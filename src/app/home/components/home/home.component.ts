@@ -35,7 +35,7 @@ export class HomeComponent  implements OnInit {
   }
 
   openUserProfile() {
-    this.router.navigate([`tabs/timesheet`])
+    this.router.navigate([`tabs/profile`])
   }
 
   doRefresh(event: any) {

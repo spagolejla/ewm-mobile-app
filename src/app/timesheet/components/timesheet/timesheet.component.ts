@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as timesheetActions from '../../../root-store/timesheet-store/actions';
 import * as timesheetSelectors from '../../../root-store/timesheet-store/selectors';
 import * as sharedActions from '../../../root-store/shared-store/actions';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-timesheet',
@@ -31,7 +32,10 @@ export class TimesheetComponent implements OnInit {
   displayedDate = new Date();
   comment = new FormControl('');
 
-  constructor(private store$: Store<TimesheetState.State>, private toastController: ToastController) { }
+  constructor(
+    private store$: Store<TimesheetState.State>, 
+    private toastController: ToastController,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.store$.dispatch(sharedActions.setTitle({ title: 'Timesheets' }));
@@ -76,11 +80,12 @@ export class TimesheetComponent implements OnInit {
       this.comment.reset();
       return;
     }
+    let user = this.authService.getUser();
     let newAction: TimesheetAction = {
       id: uuidv4(),
       status: TimesheetStatus.Submited,
       comment: this.comment.value,
-      user: { id: '00ee6e49-dd17-41a2-be30-14a2d8d5c7dd', name: 'Ibrahim Alibasic' }, //TODO: loggedIn user,
+      user: { id: user?.id, name: user?.firstName + ' ' + user?.lastName },
       date: new Date()
     }
     timesheet = { ...timesheet, status: TimesheetStatus.Submited, actions: timesheet.actions?.map(action => action) };

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Timesheet } from '../models/timesheet.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Injectable({
@@ -10,12 +11,13 @@ import { Timesheet } from '../models/timesheet.model';
 })
 export class TimesheetService {
   URL: string = `${environment.apiUrl}/timesheet`;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getTimesheetByDate(date: Date): Observable<Timesheet> {
+    let userId = this.authService.getUser()?.id as string;
     const options = date ?
-      { params: new HttpParams().set('date', date.toDateString()) } : {};
-    return this.httpClient.get<Timesheet>(this.URL + '/getTimesheetByDate/', options);
+      { params: new HttpParams().set('date', date.toDateString()).set('userId', userId) } : {};
+    return this.httpClient.get<Timesheet>(this.URL + '/getUserTimesheetByDate', options);
   }
 
   commitTimesheet(timesheet: Timesheet): Observable<Timesheet> {
