@@ -37,13 +37,13 @@
                 name="warning"></ion-icon>{{wp.task?.taskNo}}</ion-col>
             <ion-col>{{wp.start | date: 'shortTime'}}</ion-col>
             <ion-col>{{wp.end | date: 'shortTime'}}</ion-col>
-            <ion-col>{{wp.totalHours | number:'1.2-2'}}</ion-col>
+            <ion-col>{{wp.totalHours | hoursMinutes}}</ion-col>
           </ion-row>
         </ion-grid>
       </div>
       <div class="row mb-4">
         <div class="col-9">Total hours: </div>
-        <div class="col justify-content-center total-hours">{{timesheet.totalHours | number:'1.2-2'}}</div>
+        <div class="col justify-content-center total-hours">{{timesheet.totalHours | hoursMinutes}}</div>
       </div>
       <div class="row mt-2"
         *ngIf="timesheet.status == TimesheetStatus.Open || timesheet.status == TimesheetStatus.Rejected">

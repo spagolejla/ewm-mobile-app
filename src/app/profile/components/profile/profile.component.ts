@@ -19,7 +19,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(private store$: Store<any>, private modalCtrl: ModalController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.store$.dispatch(sharedActions.setTitle({title: 'My profile'}))
+   }
 
   async changePassword(user: any) {
     const modal = await this.modalCtrl.create({
